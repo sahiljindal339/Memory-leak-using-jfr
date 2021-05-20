@@ -3,7 +3,7 @@ Debug a Memory Leak Using Java Flight Recorder
 
 # Java Flight Recorder
 
-* Java Flight Recorder (JFR) is a monitoring tool that collects information about the events in a Java Virtual Machine (JVM) during the execution of a Java application. JFR is   part of the JDK distribution, and it's integrated into the JVM.
+* Java Flight Recorder (JFR) is a monitoring tool that collects information about the events in a Java Virtual Machine (JVM) during the execution of a Java application. JFR is part of the JDK distribution, and it's integrated into the JVM.
 * JFR is designed to affect the performance of a running application as little as possible.
 
 ``
@@ -12,9 +12,16 @@ These three components — JFR, jcmd and JMC — form a complete suite for colle
 
 # Detect a Memory Leak
 
-Heap Statistics generates an accurate live set information. If you suspect a rather quick memory leak, take a profiling recording that runs over, for example, an hour. Click Memory tab and select the Garbage Collections tab to inspect the first and the last old collections as shown below there is difference between heap usage when GC run first time and last run.
+Heap Statistics generates an accurate live set information. If you suspect a rather quick memory leak, take a profiling recording that runs over, for example, an hour. Click Memory tab and select Heap Usage.
+
+
+![Inkedimage (4)_LI](https://user-images.githubusercontent.com/30730414/118960827-4ab18600-b981-11eb-9b8a-497d80facd26.jpg)
+
+* It will show how heap memory reduce overtime there is some memory which GC fail to free  due to which heap memory reduce so there is definitely a memory leak in system.
+
 
 ``
+Next select the Garbage Collections tab to inspect the first and the last old collections as shown below there is difference between heap usage when GC run first time and last run.
 Select the first old collection as shown in Figure 3-1 to look at the heap data and heap usage after GC. In this recording, it is 34.10 MB. Now look at the same data from the last old collection in the list and see if the live set has grown.
 ``
 
