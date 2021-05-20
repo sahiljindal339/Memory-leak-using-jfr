@@ -42,7 +42,12 @@ After you have your recording showing the leak, you can look at Object Statistic
 
 ![Alt text](https://docs.oracle.com/javase/8/docs/technotes/guides/troubleshoot/img/jfr-memory-leak.png)
 
+
 Especially, watch the classes that are not part of the standard library. For example, you will often see Char arrays as one of the top growers. This is due to many Strings being allocated; therefore, watch out for objects that keep these Strings alive. If you have a class that has 10 Strings as members, then the object itself will not use too much heap. The heap will be used by the Strings, which mostly contains pointers to the Char arrays. Therefore, it is good to sort on the number of instances and not the size of the objects. If one of your application class has many instances, then it may very well be those objects that keep other objects alive.
+
+``
+Note: if one particular class grew fast than you can restrict the object creation of that class using Static/by using static factory method in place of a constructor or by using singleton construction.
+``
 
 
 # Find Bottlenecks
@@ -56,6 +61,15 @@ From the Event Types tab, look at the color of each event. For example, yellow r
 
 Green represents parts that don't have any events. The green part means that the thread is not sleeping, waiting, reading to or from a socket, or not being blocked. In general, this is where the application code is run. If your Java application's important threads are spending a lot of time without generating any application events, then the bottleneck in the application is the time spent executing code or the CPU itself.
 
+![image (1)](https://user-images.githubusercontent.com/30730414/118965741-9fa3cb00-b986-11eb-9949-e992ad2b7d5c.png)
+
+
 # Code Execution Performance
 
 When there are not a lot of Java Application events, it could be that the main bottleneck of your application is the running code.Select the Code tab group and look at the Hot Threads tab in case your application is using a lot of CPU time. This tab shows the threads that use the most CPU time. However, this information is based on method sampling, so it may not be 100% accurate if the sample count is low. When a JFR is running, the JVM samples the threads. By default, a continuous recording does only some method sampling, while a profiling recording does as much as possible. The method sampling gathers data from only those threads running code. The threads waiting for I/O, sleeping, waiting for locks, and so on are not sampled. Therefore, threads with a lot of method samples are the ones using the most CPU time; however, how much CPU is used by each thread is not known.
+
+![image (2)](https://user-images.githubusercontent.com/30730414/118965787-ae8a7d80-b986-11eb-9550-53a64f5f8c0f.png)
+
+# Related links:
+* [Enable JFR for Oracle JDK 8](https://www.jetbrains.com/help/idea/java-flight-recorder.html) 
+* [JFR Oracle Docs](https://docs.oracle.com/javase/10/troubleshoot/troubleshoot-performance-issues-using-jfr.htm#JSTGD311)
