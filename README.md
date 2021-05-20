@@ -25,6 +25,18 @@ Next select the Garbage Collections tab to inspect the first and the last old co
 Select the first old collection as shown in Figure 3-1 to look at the heap data and heap usage after GC. In this recording, it is 34.10 MB. Now look at the same data from the last old collection in the list and see if the live set has grown.
 ``
 
+* Heap Usage after first GC run is 19MB. 
+
+
+![image (5)](https://user-images.githubusercontent.com/30730414/118962655-3a9aa600-b983-11eb-9a27-8e368ab8a20b.png) 
+
+
+
+* Heap Usage after latest GC run is 43MB.
+
+
+![image (3)](https://user-images.githubusercontent.com/30730414/118962765-5900a180-b983-11eb-8793-dacfd73095e2.png)
+
 # Find the Leaking Class
 After you have your recording showing the leak, you can look at Object Statistics. Look at one long recording, then look at which classes grew the most in heap usage over the recording. If you took several recordings at intervals, then compare the heap contents section and see what object types have increased the most between the recordings, as shown in Figure 3-2.
 
